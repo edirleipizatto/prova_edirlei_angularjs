@@ -21,27 +21,27 @@
                 <h2>{{tipo}}</h2>
 
                 <div class="form-group">
-                    <input id="name" name="name" type="text" class="form-control" ng-model="nameContato" placeholder="Nome">
+                    <input id="name" name="name" type="text" class="form-control" ng-model="contato.nameContato" placeholder="Nome">
                 </div>
                 <div class="form-group">
-                    <input id="email" name="email" type="email" class="form-control" ng-model="emailContato" placeholder="e-mail">
+                    <input id="email" name="email" type="email" class="form-control" ng-model="contato.emailContato" placeholder="E-mail">
                 </div>
                 <div class="form-group">
-                    <input id="phone" name="phone" type="text" class="form-control" ng-model="phoneContato" placeholder="telefone">
+                    <input id="phone" name="phone" type="text" class="form-control" ng-model="contato.phoneContato" placeholder="Telefone">
                 </div> 
                 
                 <div class="form-group" ng-hide="clicouEditar">
-                    <button class="btn btn-primary pull-right" ng-click="cadastraContato(nameContato,emailContato,phoneContato)"> Cadastrar </button>
+                    <button class="btn btn-primary pull-right" ng-click="cadastraContato(contato)"> Cadastrar </button>
                 </div>
 
                 <div class="form-group" ng-show="clicouEditar">
 
-                    <div class="form-group">
+                    <div class="form-group mg2">
                         <button class="btn btn-danger pull-right" ng-click="cancelarEdicao()"> Cancelar </button>
                     </div>  
 
-                    <div class="form-group">
-                        <button class="btn btn-primary pull-right" ng-click="salvarContato(nameContato,emailContato,phoneContato)"> Salvar </button>
+                    <div class="form-group mg2">
+                        <button class="btn btn-primary pull-right" ng-click="salvarContato(contato)"> Salvar </button>
                     </div>
                 </div>
 

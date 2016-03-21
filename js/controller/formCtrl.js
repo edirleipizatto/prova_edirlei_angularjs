@@ -1,100 +1,99 @@
 myApp.controller('FormCtrl', function($scope) {
 
-	$scope.indexContato = 0;
+    $scope.indexContato = 0;
 
-	$scope.clicouEditar = false;
+    $scope.clicouEditar = false;
 
-	$scope.tipo = 'Cadastrar';
+    $scope.tipo = 'Cadastrar';
 
-	$scope.list = [
-	{
-		nameContato   : "Edirlei Pizatto",
-		emailContato : "edirleipizatto@ciss.com.br",
-		phoneContato : "(46)8822-8153"
-	},		
-	];
-	
-	//função para cadastrar um novo contato 
-	$scope.cadastraContato = function(nameContato,emailContato,phoneContato) {
-		var isOK = true;
-		if(!nameContato) {
-			alert('Informe o nome do contato')
-			isOK =  false;
-		} else {
-			if(!emailContato) {
-				alert('Informe o email do contato')
-				isOK =  false;
-			} else {
-				if(!phoneContato) {
-					alert('Informe o telefone do contato')
-					isOK =  false;
-				}
-			}
-		}
-		if (isOK)  {
-			$scope.list.push({
-				nameContato   : nameContato,
-				emailContato  : emailContato,
-				phoneContato  : phoneContato
-			});		
-			$scope.nameContato = undefined;
-			$scope.emailContato = undefined;	
-			$scope.phoneContato = undefined;	
-		}		
-	};
+    $scope.list = [
+        {
+            nameContato   : "Edirlei Pizatto",
+            emailContato : "edirleipizatto@ciss.com.br",
+            phoneContato : "(46)8822-8153"
+        },      
+    ];
+    
+    $scope.cadastraContato = function(contato) {
+        var isOK = true;
+        if(!contato.nameContato) {
+            alert('Informe o nome do contato')
+            isOK =  false;
+        } else {
+            if(!contato.emailContato) {
+                alert('Informe o email do contato')
+                isOK =  false;
+            } else {
+                if(!contato.phoneContato) {
+                    alert('Informe o telefone do contato')
+                    isOK =  false;
+                }
+            }
+        }
+        if (isOK)  {
+            $scope.list.push({
+                nameContato   : contato.nameContato,
+                emailContato  : contato.emailContato,
+                phoneContato  : contato.phoneContato
+            });     
+            $scope.contato.nameContato = undefined;
+            $scope.contato.emailContato = undefined;    
+            $scope.contato.phoneContato = undefined;    
+        }       
+    };
+    
+    //função para editar um Contato
+    $scope.editaContato = function(dataIndex) {
+        $scope.clicouEditar = true;
+        $scope.indexContato = dataIndex;
+        $scope.contato.nameContato = $scope.list[dataIndex].nameContato;
+        $scope.contato.emailContato = $scope.list[dataIndex].emailContato;  
+        $scope.contato.phoneContato = $scope.list[dataIndex].phoneContato;  
 
-	//função para editar um Contato
-	$scope.editaContato = function(dataIndex) {
-		$scope.clicouEditar = true;
-		$scope.indexContato = dataIndex;
-		$scope.nameContato = $scope.list[dataIndex].nameContato;
-		$scope.emailContato = $scope.list[dataIndex].emailContato;	
-		$scope.phoneContato = $scope.list[dataIndex].phoneContato;	
+        $scope.tipo = 'Editar';
+    };
 
-		$scope.tipo = 'Editar';
-	};
+    //função para deletar um contato
+    $scope.deletaContato = function(dataIndex) {
 
-	//função para deletar um contato
-	$scope.deletaContato = function(dataIndex) {
+        if ($scope.indexContato > 0) {
+            $scope.cancelarRenomear();  
+        };       
+        $scope.list.splice(dataIndex, 1); 
 
-		if ($scope.indexContato > 0) {
-			$scope.cancelarRenomear();	
-		};		 
-		$scope.list.splice(dataIndex, 1); 
+    };
 
-	};
+    //função para cancelar edição
+    $scope.cancelarEdicao = function() {             
+        
+        $scope.clicouEditar = false;
+        $scope.indexContato = 0;
 
-	//função para cancelar edição
-	$scope.cancelarEdicao = function() {			 
-		
-		$scope.clicouEditar = false;
-		$scope.indexContato = 0;
+        $scope.contato.nameContato = undefined;
+        $scope.contato.emailContato = undefined;    
+        $scope.contato.phoneContato = undefined;    
+        $scope.tipo = 'Cadastrar';
+        
+    };
 
-		$scope.nameContato = undefined;
-		$scope.emailContato = undefined;	
-		$scope.phoneContato = undefined;	
-		$scope.tipo = 'Cadastrar';
-		
-	};
+    //função para renomear uma tarefa
+    $scope.salvarContato = function(contato) {
+        var editObj = {};
+        editObj = {
+            nameContato   : contato.nameContato,
+            emailContato  : contato.emailContato,
+            phoneContato  : contato.phoneContato
+        };
+        $scope.list[$scope.indexContato] = editObj;
 
-	//função para renomear uma tarefa
-	$scope.salvarContato = function(nameContato,emailContato,phoneContato) {
-		var editObj = {};
-		editObj = {
-			nameContato   : nameContato,
-			emailContato  : emailContato,
-			phoneContato  : phoneContato
-		};
-		$scope.list[$scope.indexContato] = editObj;
+        $scope.contato.nameContato = undefined;
+        $scope.contato.emailContato = undefined;    
+        $scope.contato.phoneContato = undefined;
 
-		$scope.nameContato = undefined;
-		$scope.emailContato = undefined;	
-		$scope.phoneContato = undefined;
+        $scope.clicouEditar = false;
 
-		$scope.clicouEditar = false;
-
-		$scope.tipo = 'Cadastrar';
-	};
+        $scope.tipo = 'Cadastrar';
+    };
 
 
 });
