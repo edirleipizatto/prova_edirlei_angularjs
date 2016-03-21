@@ -31,16 +31,16 @@
                 </div> 
                 
                 <div class="form-group" ng-hide="clicouEditar">
-                    <button class="btn btn-primary pull-right" ng-click="cadastraContato(contato)"> Cadastrar </button>
+                    <button class="btn btn-primary pull-right" ng-click="cadastraContato()"> Cadastrar </button>
                 </div>
 
                 <div class="form-group" ng-show="clicouEditar">
 
-                    <div class="form-group mg2">
+                    <div class="form-group">
                         <button class="btn btn-danger pull-right" ng-click="cancelarEdicao()"> Cancelar </button>
                     </div>  
 
-                    <div class="form-group mg2">
+                    <div class="form-group">
                         <button class="btn btn-primary pull-right" ng-click="salvarContato(contato)"> Salvar </button>
                     </div>
                 </div>
